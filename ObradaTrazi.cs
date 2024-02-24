@@ -10,45 +10,60 @@ namespace UcenjeCS.StreamingApp
 {
     internal class ObradaTrazi
     {
-        public List<Serija> Serije { get; }
-
-        public ObradaTrazi()
-        {
-            Serije = new List<Serija>();
-            if (Pomocno.dev)
-            {
-                TestniPodaci();
-            }
-        }
-
         public void PrikaziIzbornik()
         {
             Console.WriteLine("Tražilica");
-            Console.WriteLine("1. Traži po nazivu");
-            Console.WriteLine("2. Traži po žanru");
-            Console.WriteLine("3. Traži po datumu izdavanja");
-
-            switch ()
+            Console.WriteLine("1. Traži seriju");
+            Console.WriteLine("2. Povratak na glavni izbornik");
+            switch(Pomocno.ucitajBrojRaspon("Odaberite stavku izbornika: ",
+                "Odabir mora biti 1 - 2.", 1, 2))
             {
                 case 1:
-                    TraziNaziv();
+                    TraziSeriju();
+                    GledanjeSerije();
                     PrikaziIzbornik();
                     break;
                 case 2:
-                    TraziZanr();
+                    Console.WriteLine("Gotov rad s tražilicom");
+                    break;
+            }
+        }
+
+        public void TraziSeriju() 
+        {
+            Pomocno.UcitajString("Upiši naziv serije", "Serija ne postoji");
+        }
+
+        public void GledanjeSerije() 
+        {
+            Console.WriteLine("1. Sada gledaj seriju");
+            Console.WriteLine("2. Kasnije gledaj seriju");
+            Console.WriteLine("3. Povratak na glavni izbornik");
+            switch (Pomocno.ucitajBrojRaspon("Odaberite stavku izbornika: ",
+                "Odabir mora biti 1 - 3.", 1, 3))
+            {
+                case 1:
+                    SadaGledaj();
+                    PrikaziIzbornik();
+                    break;
+                case 2:
+                    GledajKasnije();
                     PrikaziIzbornik();
                     break;
                 case 3:
-                    TraziDatum();
-                    PrikaziIzbornik();
+                    Console.WriteLine("Gotov rad s gledanjem");
                     break;
             }
+        }
 
-            private void TraziNaziv() { }
+        private void SadaGledaj()
+        {
+            
+        }
 
-            private void TraziZanr() { }
+        private void GledajKasnije()
+        {
 
-            private void TraziDatum() { }
         }
     }
 }
