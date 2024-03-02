@@ -31,7 +31,7 @@ namespace UcenjeCS.StreamingApp
             }
         }
 
-        public void PregledPovijesti()
+        private void PregledPovijesti()
         {
             Console.WriteLine("------------------");
             Console.WriteLine("---- Povijest ----");
@@ -39,7 +39,7 @@ namespace UcenjeCS.StreamingApp
             int b = 1;
             foreach (Epizoda epizoda in Epizode)
             {
-                if (epizoda.pogledano == 0)
+                if (epizoda.Pogledano == 1)
                 {
                     Console.WriteLine("{0}. {1}", b++, epizoda);
                 }
@@ -48,11 +48,12 @@ namespace UcenjeCS.StreamingApp
             Console.WriteLine("------------------");
         }
 
-        public void BrisanjeEpizoda()
+        private void BrisanjeEpizode()
         {
             PregledPovijesti();
-            int index = Pomocno.ucitajBrojRaspon("Odaberi redni broj epizode: ", "Nije dobar odabir", 1, Polaznici.Count());
-            Polaznici.RemoveAt(index - 1);
+            int index = Pomocno.ucitajBrojRaspon("Odaberi redni broj epizode: ", "Nije dobar odabir", 1, Epizode.Count());
+            var p = Epizode[index - 1];
+            p.Pogledano = 0;
         }
     }
 }

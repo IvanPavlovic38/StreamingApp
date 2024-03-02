@@ -8,25 +8,31 @@ namespace UcenjeCS.StreamingApp
 {
     internal class Prijava
     {
-        private void PozdravnaPoruka()
+        public void PrikaziIzbornik()
         {
-            Console.WriteLine("Dobrodosli u streaming app");
-            Console.WriteLine("Upisite korisnicko ime, lozinku i email");
+            Console.WriteLine("Izbornik za prijavu");
+            Console.WriteLine("1. Unos korisničkog imena, lozinke i emaila");
+            Console.WriteLine("2. Povratak na glavni izbornik");
+            switch(Pomocno.ucitajBrojRaspon("Odaberite stavku izbornika: ",
+                "Odabir mora biti 1 - 2.", 1, 2))
+            {
+                case 1:
+                    Unos();
+                    PrikaziIzbornik();
+                    break;
+                case 2:
+                    Console.WriteLine("Gotov rad s prijavom");
+                    break;
+            }
         }
 
-        private void UpisiKorisnickoIme()
+        private void Unos()
         {
-            KorisnickoIme = Pomocno.UcitajString("Korisničko ime: ");
-        }
-
-        private void UpisiLozinku()
-        {
-            Lozinka = Pomocno.UcitajString("Lozinka: ");
-        }
-
-        private void UpisiEmail()
-        {
-            Email = Pomocno.UcitajString("Email: ");
+            var g = new Korisnik();
+            g.KorisnickoIme = Pomocno.UcitajString("Unesi korisničko ime", "Ime obavezno");
+            g.Lozinka = Pomocno.UcitajString("Unesi lozinku", "Lozinka obavezna");
+            g.Email = Pomocno.UcitajString("Unesi email", "Email obavezan");
+            Korisnici.Add(g);
         }
     }
 }

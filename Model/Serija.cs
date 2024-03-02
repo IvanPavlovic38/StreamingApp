@@ -10,5 +10,6 @@ namespace UcenjeCS.StreamingApp.Model
     {
         public string Naziv { get; set; }
         public string Opis { get; set; }
+        public bool GledajKasnije { get; set; }
     }
 }

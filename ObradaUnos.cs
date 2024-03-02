@@ -6,7 +6,6 @@ public class ObradaUnos
 	{
 		public void PrikaziIzbornik()
 		{
-			Console.WriteLine("Unos serija");
 			
 		}
 	}

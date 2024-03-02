@@ -19,6 +19,28 @@ public class Pomocno
             }
         }
 
-        internal static void 
+        public static int ucitajBrojRaspon(string poruka, string greska,
+            int poc, int kraj)
+        {
+            int b;
+            while (true)
+            {
+                Console.Write(poruka);
+                try
+                {
+                    b = int.Parse(Console.ReadLine());
+                    if (b >= poc && b <= kraj)
+                    {
+                        return b;
+                    }
+                    Console.WriteLine(greska);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(greska);
+                }
+            }
+        }
+
     }
 }

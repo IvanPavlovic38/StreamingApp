@@ -33,9 +33,12 @@ namespace UcenjeCS.StreamingApp
             Console.WriteLine("2. Žanrovi");
             Console.WriteLine("3. Vaša lista");
             Console.WriteLine("4. Povijest gledanja");
-            Console.WriteLine("5. Izlaz iz programa");
+            Console.WriteLine("5. Prijava");
+            Console.WriteLine("6. Unos nove serije");
+            Console.WriteLine("7. Izlaz iz programa");
 
-            switch ()
+            switch (Pomocno.ucitajBrojRaspon("Odaberite stavku izbornika: ",
+                "Odabir mora biti 1 - 5.", 1, 5))
             {
                 case 1:
                     ObradaTrazi.PrikaziIzbornik();
@@ -47,13 +50,17 @@ namespace UcenjeCS.StreamingApp
                     break;
                 case 3:
                     ObradaVasaLista.PrikaziIzbornik();
-                    PrikaziIzbornik(); ;
+                    PrikaziIzbornik(); 
                     break;
                 case 4:
                     ObradaPovijest.PrikaziIzbornik();
                     PrikaziIzbornik();
                     break;
                 case 5:
+                    Prijava.PrikaziIzbornik();
+                    PrikaziIzbornik();
+                    break;
+                case 7:
                     Console.WriteLine("Hvala na korištenju, doviđenja");
                     break;
             }
