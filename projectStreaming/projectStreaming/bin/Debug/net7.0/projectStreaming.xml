@@ -8,22 +8,12 @@
             <param name="context"></param>
         </member>
         <member name="M:projectStreaming.Controllers.SerijaController.Get">
-            <remarks>
-            Primjer upita
-            
-               GET api/v1/Serija
-               
-            </remarks>
             <returns>Serije u bazi</returns>
             <response code="200">Sve OK, ako nema podataka content-length: 0 </response>
             <response code="400">Zahtjev nije valjan</response>
             <response code="503">Baza na koju se spajam nije dostupna</response>
         </member>
         <member name="M:projectStreaming.Controllers.SerijaController.Post(projectStreaming.models.Serija)">
-            <remarks>
-                POST api/v1/Serija
-                {naziv: "Primjer naziva"}
-            </remarks>
             <param name="serija">Serija za unijeti u JSON formatu</param>
             <response code="201">Kreirano</response>
             <response code="400">Zahtjev nije valjan (BadRequest)</response> 
@@ -31,9 +21,6 @@
             <returns>Serija s šifrom koju je dala baza</returns>
         </member>
         <member name="M:projectStreaming.Controllers.SerijaController.Put(System.Int32,projectStreaming.models.Serija)">
-            <remarks>
-               PUT api/v1/serija/1
-            </remarks>
             <param name="sifra">Šifra serije koja se mijenja</param>  
             <param name="smjer">Smjer za unijeti u JSON formatu</param>  
             <returns>Svi poslani podaci od serije koji su spremljeni u bazi</returns>

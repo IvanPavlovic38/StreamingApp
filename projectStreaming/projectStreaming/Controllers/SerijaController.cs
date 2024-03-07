@@ -19,13 +19,7 @@ namespace projectStreaming.Controllers
             _context = context;
         }
 
-       
-        /// <remarks>
-        /// Primjer upita
-        /// 
-        ///    GET api/v1/Serija
-        ///    
-        /// </remarks>
+
         /// <returns>Serije u bazi</returns>
         /// <response code="200">Sve OK, ako nema podataka content-length: 0 </response>
         /// <response code="400">Zahtjev nije valjan</response>
@@ -53,11 +47,7 @@ namespace projectStreaming.Controllers
             }
         }
 
-        
-        /// <remarks>
-        ///     POST api/v1/Serija
-        ///     {naziv: "Primjer naziva"}
-        /// </remarks>
+
         /// <param name="serija">Serija za unijeti u JSON formatu</param>
         /// <response code="201">Kreirano</response>
         /// <response code="400">Zahtjev nije valjan (BadRequest)</response> 
@@ -83,10 +73,7 @@ namespace projectStreaming.Controllers
             }
         }
 
- 
-        /// <remarks>
-        ///    PUT api/v1/serija/1
-        /// </remarks>
+
         /// <param name="sifra">Šifra serije koja se mijenja</param>  
         /// <param name="smjer">Smjer za unijeti u JSON formatu</param>  
         /// <returns>Svi poslani podaci od serije koji su spremljeni u bazi</returns>
