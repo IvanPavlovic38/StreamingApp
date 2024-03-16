@@ -1,7 +1,8 @@
 ﻿using projectStreaming.models;
 using Microsoft.EntityFrameworkCore;
 
-namespace projectStreaming.data
+
+namespace projectStreaming.Data
 {
     public class StreamingContext : DbContext
     {
@@ -14,5 +15,11 @@ namespace projectStreaming.data
         }
 
         public DbSet<Serija> Serije { get; set; }
+
+        public DbSet<Zanr> Zanrovi { get; set; }
+
+        public DbSet<Sezona> Sezone { get; set; }
+
+        public DbSet<Epizoda> Epizode { get; set; }
     }
 }

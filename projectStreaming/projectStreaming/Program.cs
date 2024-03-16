@@ -1,4 +1,4 @@
-﻿using projectStreaming.data;
+﻿using projectStreaming.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -45,7 +45,10 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
-app.UseSwagger();
+app.UseSwagger(opcije =>
+    {
+        opcije.SerializeAsV2 = true;
+    });
 // mogućnost generiranja poziva rute u CMD i Powershell
 app.UseSwaggerUI(opcije =>
 {

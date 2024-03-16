@@ -144,3 +144,7 @@ C:\Users\Ivan\Documents\GitHub\StreamingApp\projectStreaming\projectStreaming\ob
 C:\Users\Ivan\Documents\GitHub\StreamingApp\projectStreaming\projectStreaming\obj\Debug\net7.0\projectStreaming.pdb
 C:\Users\Ivan\Documents\GitHub\StreamingApp\projectStreaming\projectStreaming\obj\Debug\net7.0\projectStreaming.genruntimeconfig.cache
 C:\Users\Ivan\Documents\GitHub\StreamingApp\projectStreaming\projectStreaming\obj\Debug\net7.0\ref\projectStreaming.dll
+<<<<<<< HEAD
+C:\Users\Polaznik\Documents\GitHub\StreamingApp\projectStreaming\projectStreaming\bin\Debug\net7.0\projectStreaming.staticwebassets.runtime.json
+=======
+>>>>>>> a405faef36c59a6e3971e79f4027f3f5ba6618f1
