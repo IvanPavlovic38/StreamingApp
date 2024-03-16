@@ -8,6 +8,6 @@
 
         public string? Opis { get; set; }
 
-        public DateTime? DatumIzadavnja { get; set; }
+        public DateTime? DatumIzdavnja { get; set; }
     }
 }

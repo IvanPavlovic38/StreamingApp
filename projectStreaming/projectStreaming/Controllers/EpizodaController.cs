@@ -104,6 +104,9 @@ namespace projectStreaming.Controllers
 
 
                 epizodaIzBaze.Naziv = epizoda.Naziv;
+                epizodaIzBaze.Trajanje = epizoda.Trajanje;
+                epizodaIzBaze.Opis = epizoda.Opis;
+                epizodaIzBaze.DatumIzdavnja = epizoda.DatumIzdavnja;
 
                 _context.Epizode.Update(epizodaIzBaze);
                 _context.SaveChanges();
