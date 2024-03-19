@@ -21,5 +21,7 @@ namespace projectStreaming.Data
         public DbSet<Sezona> Sezone { get; set; }
 
         public DbSet<Epizoda> Epizode { get; set; }
+
+        public DbSet<Korisnik> Korisnici { get; set; }
     }
 }

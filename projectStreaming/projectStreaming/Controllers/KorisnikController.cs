@@ -7,19 +7,19 @@ namespace projectStreaming.Controllers
 
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class EpizodaController : ControllerBase
+    public class KorisnikController : ControllerBase
     {
 
         private readonly StreamingContext _context;
 
         /// <param name="context"></param>
-        public EpizodaController(StreamingContext context)
+        public KorisnikController(StreamingContext context)
         {
             _context = context;
         }
 
 
-        /// <returns>Epizode u bazi</returns>
+        /// <returns>Korisnici u bazi</returns>
         /// <response code="200">Sve OK, ako nema podataka content-length: 0 </response>
         /// <response code="400">Zahtjev nije valjan</response>
         /// <response code="503">Baza na koju se spajam nije dostupna</response>
@@ -32,12 +32,12 @@ namespace projectStreaming.Controllers
             }
             try
             {
-                var epizode = _context.Epizode.ToList();
-                if (epizode == null || epizode.Count() == 0)
+                var korisnici = _context.Korisnici.ToList();
+                if (korisnici == null || korisnici.Count() == 0)
                 {
                     return new EmptyResult();
                 }
-                return new JsonResult(epizode);
+                return new JsonResult(korisnici);
             }
             catch (Exception ex)
             {
@@ -47,23 +47,23 @@ namespace projectStreaming.Controllers
         }
 
 
-        /// <param name="epizoda">Epizoda za unijeti u JSON formatu</param>
+        /// <param name="korisnik">Korisnik za unijeti u JSON formatu</param>
         /// <response code="201">Kreirano</response>
         /// <response code="400">Zahtjev nije valjan (BadRequest)</response> 
         /// <response code="503">Baza nedostupna iz razno raznih razloga</response> 
-        /// <returns>Epizoda s šifrom koju je dala baza</returns>
+        /// <returns>Korisnik s šifrom koju je dala baza</returns>
         [HttpPost]
-        public IActionResult Post(Epizoda epizoda)
+        public IActionResult Post(Korisnik korisnik)
         {
-            if (!ModelState.IsValid || epizoda == null)
+            if (!ModelState.IsValid || korisnik == null)
             {
                 return BadRequest();
             }
             try
             {
-                _context.Epizode.Add(epizoda);
+                _context.Korisnici.Add(korisnik);
                 _context.SaveChanges();
-                return StatusCode(StatusCodes.Status201Created, epizoda);
+                return StatusCode(StatusCodes.Status201Created, korisnik);
             }
             catch (Exception ex)
             {
@@ -73,18 +73,18 @@ namespace projectStreaming.Controllers
         }
 
 
-        /// <param name="sifra">Šifra epizode koja se mijenja</param>  
-        /// <param name="epizoda">Epizoda za unijeti u JSON formatu</param>  
-        /// <returns>Svi poslani podaci od epizode koji su spremljeni u bazi</returns>
+        /// <param name="sifra">Šifra korisnika koja se mijenja</param>  
+        /// <param name="korisnik">Korisnik za unijeti u JSON formatu</param>  
+        /// <returns>Svi poslani podaci od korisnika koji su spremljeni u bazi</returns>
         /// <response code="200">Sve je u redu</response>
-        /// <response code="204">Nema u bazi epizode koje želimo promijeniti</response>
+        /// <response code="204">Nema u bazi korisnika kojeg želimo promijeniti</response>
         /// <response code="415">Nismo poslali JSON</response> 
         /// <response code="503">Baza nedostupna</response> 
         [HttpPut]
         [Route("{sifra:int}")]
-        public IActionResult Put(int sifra, Epizoda epizoda)
+        public IActionResult Put(int sifra, Korisnik korisnik)
         {
-            if (sifra <= 0 || !ModelState.IsValid || epizoda == null)
+            if (sifra <= 0 || !ModelState.IsValid || korisnik == null)
             {
                 return BadRequest();
             }
@@ -94,24 +94,24 @@ namespace projectStreaming.Controllers
             {
 
 
-                var epizodaIzBaze = _context.Epizode.Find(sifra);
+                var korisnikIzBaze = _context.Korisnici.Find(sifra);
 
-                if (epizodaIzBaze == null)
+                if (korisnikIzBaze == null)
                 {
                     return StatusCode(StatusCodes.Status204NoContent, sifra);
                 }
 
 
 
-                epizodaIzBaze.Naziv = epizoda.Naziv;
-                epizodaIzBaze.Trajanje = epizoda.Trajanje;
-                epizodaIzBaze.Opis = epizoda.Opis;
-                epizodaIzBaze.DatumIzdavanja = epizoda.DatumIzdavanja;
+                korisnikIzBaze.KorisnickoIme = korisnik.KorisnickoIme;
+                korisnikIzBaze.Lozinka = korisnik.Lozinka;
+                korisnikIzBaze.Email = korisnik.Email;
+                korisnikIzBaze.Jezik = korisnik.Jezik;
 
-                _context.Epizode.Update(epizodaIzBaze);
+                _context.Korisnici.Update(korisnikIzBaze);
                 _context.SaveChanges();
 
-                return StatusCode(StatusCodes.Status200OK, epizodaIzBaze);
+                return StatusCode(StatusCodes.Status200OK, korisnikIzBaze);
             }
             catch (Exception ex)
             {
@@ -123,10 +123,10 @@ namespace projectStreaming.Controllers
 
 
 
-        /// <param name="sifra">Šifra epizode koja se briše</param>  
+        /// <param name="sifra">Šifra korisnika koja se briše</param>  
         /// <returns>Odgovor da li je obrisano ili ne</returns>
         /// <response code="200">Sve je u redu, obrisano je u bazi</response>
-        /// <response code="204">Nema u bazi epizode koje želimo obrisati</response>
+        /// <response code="204">Nema u bazi korisniak kojeg želimo obrisati</response>
         /// <response code="503">Problem s bazom</response> 
         [HttpDelete]
         [Route("{sifra:int}")]
@@ -140,14 +140,14 @@ namespace projectStreaming.Controllers
 
             try
             {
-                var epizodaIzBaze = _context.Epizode.Find(sifra);
+                var korisnikIzBaze = _context.Korisnici.Find(sifra);
 
-                if (epizodaIzBaze == null)
+                if (korisnikIzBaze == null)
                 {
                     return StatusCode(StatusCodes.Status204NoContent, sifra);
                 }
 
-                _context.Epizode.Remove(epizodaIzBaze);
+                _context.Korisnici.Remove(korisnikIzBaze);
                 _context.SaveChanges();
 
                 return new JsonResult(new { poruka = "Obrisano" });
