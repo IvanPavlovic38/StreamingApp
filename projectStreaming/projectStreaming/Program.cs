@@ -32,6 +32,18 @@ builder.Services.AddSwaggerGen(sgo =>
 
 });
 
+// Svi se od svuda na sve moguće načine mogu spojitina naš API
+// Čitati https://code-maze.com/aspnetcore-webapi-best-practices/
+builder.Services.AddCors(opcije =>
+{
+    opcije.AddPolicy("CorsPolicy",
+        builder =>
+            builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()
+    );
+
+});
+
+
 
 
 builder.Services.AddDbContext<StreamingContext>(o =>
@@ -62,6 +74,9 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseStaticFiles();
+
+app.UseCors("CorsPolicy");
 
 app.UseDefaultFiles();
 app.UseDeveloperExceptionPage();

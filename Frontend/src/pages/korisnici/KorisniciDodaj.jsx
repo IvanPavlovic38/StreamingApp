@@ -1,40 +1,19 @@
-import { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import KorisnikService from '../../services/KorisnikService';
 import { RoutesNames } from '../../constants';
 
-export default function KorisniciPromjeni() {
-  const [korisnik, setKorisnik] = useState({});
 
-  const routeParams = useParams();
+export default function KorisniciDodaj() {
   const navigate = useNavigate();
 
 
-  async function dohvatiKorisnik() {
-
-    await KorisnikService
-      .getBySifra(routeParams.sifra)
-      .then((response) => {
-        console.log(response);
-        setKorisnik(response.data);
-      })
-      .catch((err) => alert(err.poruka));
-
-  }
-
-  useEffect(() => {
-    dohvatiKorisnik();
-  }, []);
-
-  async function promjeniKorisnik(korisnik) {
-    const odgovor = await KorisnikService.promjeni(routeParams.sifra, korisnik);
-
+  async function dodajKorisnik(Korisnik) {
+    const odgovor = await KorisnikService.dodaj(Korisnik);
     if (odgovor.ok) {
       navigate(RoutesNames.KORISNICI_PREGLED);
     } else {
-      alert(odgovor.poruka);
-
+      alert(odgovor.poruka.errors);
     }
   }
 
@@ -42,8 +21,10 @@ export default function KorisniciPromjeni() {
     e.preventDefault();
 
     const podaci = new FormData(e.target);
-    promjeniKorisnik({
-      korisnckoime: podaci.get('korisnickoime'),
+
+
+    dodajKorisnik({
+      korisnickoime: podaci.get('korisnickoime'),
       lozinka: podaci.get('lozinka'),
       email: podaci.get('email'),
       jezik: podaci.get('jezik'),
@@ -53,13 +34,12 @@ export default function KorisniciPromjeni() {
   return (
     <Container className='mt-4'>
       <Form onSubmit={handleSubmit}>
-
-      <Form.Group className='mb-3' controlId='korisnickoime'>
-          <Form.Label>Korisnicko Ime</Form.Label>
+        <Form.Group className='mb-3' controlId='korisnickoime'>
+          <Form.Label>Korisničko Ime</Form.Label>
           <Form.Control
             type='text'
             name='korisnickoime'
-            defaultValue={korisnik.korisnckoimeime}
+            placeholder='Ime Korisnika'
             maxLength={255}
             required
           />
@@ -70,7 +50,7 @@ export default function KorisniciPromjeni() {
           <Form.Control
             type='text'
             name='lozinka'
-            defaultValue={korisnik.lozinka}
+            placeholder='Lozinka Korisnika'
             maxLength={255}
             required
           />
@@ -81,21 +61,23 @@ export default function KorisniciPromjeni() {
           <Form.Control
             type='email'
             name='email'
-            defaultValue={korisnik.email}
+            placeholder='Email Korisnika'
             maxLength={255}
+            required
           />
         </Form.Group>
 
         <Form.Group className='mb-3' controlId='jezik'>
-          <Form.Label>Jezik</Form.Label>
+          <Form.Label>Email</Form.Label>
           <Form.Control
             type='text'
             name='jezik'
-            defaultValue={korisnik.jezik}
+            placeholder='Jezik Korisnika'
             maxLength={255}
           />
         </Form.Group>
 
+       
 
         <Row>
           <Col>
@@ -105,7 +87,7 @@ export default function KorisniciPromjeni() {
           </Col>
           <Col>
             <Button variant='primary' className='gumb' type='submit'>
-              Promjeni Korisnika
+              Dodaj Polaznika
             </Button>
           </Col>
         </Row>

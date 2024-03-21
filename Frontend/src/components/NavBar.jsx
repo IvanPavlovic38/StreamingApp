@@ -25,32 +25,16 @@ function NavBar() {
           <Nav className="me-auto">
             
             <NavDropdown title="Programi" id="basic-nav-dropdown">
-              <NavDropdown.Item 
-                onClick={()=>navigate(RoutesNames.EPIZODE_PREGLED)}
-              >
-                Epizode
-              </NavDropdown.Item>
-              <NavDropdown.Item 
-              onClick={()=>navigate(RoutesNames.SERIJE_PREGLED)}
-              >
-                Serije
-              </NavDropdown.Item>
+              
+              
               <NavDropdown.Item 
               onClick={()=>navigate(RoutesNames.KORISNICI_PREGLED)}
               >
                 Korisnici
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item 
-              onClick={()=>navigate(RoutesNames.ZANROVI_PREGLED)}
-              >
-                Zanrovi
-              </NavDropdown.Item>
-              <NavDropdown.Item 
-                onClick={()=>navigate(RoutesNames.SEZONE_PREGLED)}
-              >
-                Sezone
-              </NavDropdown.Item>
+              
+              
             </NavDropdown>
             
           </Nav>

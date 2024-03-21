@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Container, Table } from "react-bootstrap";
-import PolaznikService from "../../services/KorisnikService";
+import KorisnikService from "../../services/KorisnikService";
 import { IoIosAdd } from "react-icons/io";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -52,7 +52,6 @@ export default function Korisnici(){
                         <th>Email</th>
                         <th>Lozinka</th>
                         <th>Jezik</th>
-                        <th>Akcija</th>
                     </tr>
                 </thead>
                 <tbody>
