@@ -33,6 +33,13 @@ function NavBar() {
                 Korisnici
               </NavDropdown.Item>
               <NavDropdown.Divider />
+
+              <NavDropdown.Item 
+              onClick={()=>navigate(RoutesNames.ZANROVI_PREGLED)}
+              >
+                Zanrovi
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
               
               
             </NavDropdown>
