@@ -63,39 +63,31 @@ export default function EpizodeDodaj() {
             name='opis'
             placeholder='Opis Epizode'
             maxLength={255}
+            required
           />
         </Form.Group>
 
-        <Form.Group className='mb-3' controlId='email'>
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type='email'
-            name='email'
-            placeholder='Email Predavaca'
-            maxLength={255}
-          />
-        </Form.Group>
-
-        <Form.Group className='mb-3' controlId='iban'>
-          <Form.Label>IBAN</Form.Label>
+        <Form.Group className='mb-3' controlId='datumizdavanja'>
+          <Form.Label>Datum Izdavanja</Form.Label>
           <Form.Control
             type='text'
-            name='iban'
-            placeholder='IBAN Predavaca'
+            name='datumizavanja'
+            placeholder='Datum Izdavanja Epizode'
+            maxLength={255}
+            required
           />
         </Form.Group>
-
        
 
         <Row>
           <Col>
-            <Link className='btn btn-danger gumb' to={RoutesNames.PREDAVACI_PREGLED}>
+            <Link className='btn btn-danger gumb' to={RoutesNames.EPIZODE_PREGLED}>
               Odustani
             </Link>
           </Col>
           <Col>
             <Button variant='primary' className='gumb' type='submit'>
-              Dodaj Predavača
+              Dodaj Epizodu
             </Button>
           </Col>
         </Row>

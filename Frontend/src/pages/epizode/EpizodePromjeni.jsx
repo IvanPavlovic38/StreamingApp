@@ -1,37 +1,37 @@
 import { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import PredavacService from '../../services/EpizodeService';
+import EpizodaService from '../../services/EpizodeService';
 import { RoutesNames } from '../../constants';
 
-export default function PredavaciPromjeni() {
-  const [predavac, setPredavac] = useState({});
+export default function EpizodePromjeni() {
+  const [epizoda, setEpizoda] = useState({});
 
   const routeParams = useParams();
   const navigate = useNavigate();
 
 
-  async function dohvatiPredavac() {
+  async function dohvatiEpizoda() {
 
-    await PredavacService
+    await EpizodaService
       .getBySifra(routeParams.sifra)
       .then((response) => {
         console.log(response);
-        setPredavac(response.data);
+        setEpizoda(response.data);
       })
       .catch((err) => alert(err.poruka));
 
   }
 
   useEffect(() => {
-    dohvatiPredavac();
+    dohvatiEpizoda();
   }, []);
 
-  async function promjeniPredavac(predavac) {
-    const odgovor = await PredavacService.promjeni(routeParams.sifra, predavac);
+  async function promjeniEpizoda(epizoda) {
+    const odgovor = await EpizodaService.promjeni(routeParams.sifra, epizoda);
 
     if (odgovor.ok) {
-      navigate(RoutesNames.PREDAVACI_PREGLED);
+      navigate(RoutesNames.EPIZODE_PREGLED);
     } else {
       alert(odgovor.poruka);
 
@@ -42,12 +42,11 @@ export default function PredavaciPromjeni() {
     e.preventDefault();
 
     const podaci = new FormData(e.target);
-    promjeniPredavac({
-      ime: podaci.get('ime'),
-      prezime: podaci.get('prezime'),
-      oib: podaci.get('oib'),
-      email: podaci.get('email'),
-      iban: podaci.get('iban')
+    promjeniEpizoda({
+      naziv: podaci.get('naziv'),
+      trajanje: podaci.get('trajanje'),
+      opis: podaci.get('opis'),
+      datumizdavanja: podaci.get('datumizdavanja'),
     });
   }
 
@@ -55,66 +54,57 @@ export default function PredavaciPromjeni() {
     <Container className='mt-4'>
       <Form onSubmit={handleSubmit}>
 
-      <Form.Group className='mb-3' controlId='ime'>
-          <Form.Label>Ime</Form.Label>
+      <Form.Group className='mb-3' controlId='naziv'>
+          <Form.Label>Naziv</Form.Label>
           <Form.Control
             type='text'
-            name='ime'
-            defaultValue={predavac.ime}
+            name='naziv'
+            defaultValue={epizoda.naziv}
             maxLength={255}
             required
           />
         </Form.Group>
 
-        <Form.Group className='mb-3' controlId='prezime'>
-          <Form.Label>Prezime</Form.Label>
+        <Form.Group className='mb-3' controlId='trajanje'>
+          <Form.Label>Trajanje</Form.Label>
           <Form.Control
             type='text'
-            name='prezime'
-            defaultValue={predavac.prezime}
+            name='trajanje'
+            defaultValue={epizoda.trajanje}
             maxLength={255}
             required
           />
         </Form.Group>
 
-        <Form.Group className='mb-3' controlId='oib'>
-          <Form.Label>OIB</Form.Label>
+        <Form.Group className='mb-3' controlId='opis'>
+          <Form.Label>Opis</Form.Label>
           <Form.Control
             type='text'
-            name='oib'
-            defaultValue={predavac.oib}
-            maxLength={11}
+            name='opis'
+            defaultValue={epizoda.opis}
+            maxLength={255}
           />
         </Form.Group>
 
-        <Form.Group className='mb-3' controlId='email'>
-          <Form.Label>Email</Form.Label>
+        <Form.Group className='mb-3' controlId='datumizdavanja'>
+          <Form.Label>Datum Izdavanja</Form.Label>
           <Form.Control
             type='email'
-            name='email'
-            defaultValue={predavac.email}
+            name='datumizdavanja'
+            defaultValue={epizoda.datumizdavanja}
             maxLength={255}
-          />
-        </Form.Group>
-
-        <Form.Group className='mb-3' controlId='iban'>
-          <Form.Label>IBAN</Form.Label>
-          <Form.Control
-            type='text'
-            name='iban'
-            defaultValue={predavac.iban}
           />
         </Form.Group>
 
         <Row>
           <Col>
-            <Link className='btn btn-danger gumb' to={RoutesNames.PREDAVACI_PREGLED}>
+            <Link className='btn btn-danger gumb' to={RoutesNames.EPIZODE_PREGLED}>
               Odustani
             </Link>
           </Col>
           <Col>
             <Button variant='primary' className='gumb' type='submit'>
-              Promjeni predavača
+              Promjeni epizodu
             </Button>
           </Col>
         </Row>

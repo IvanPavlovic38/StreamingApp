@@ -40,6 +40,20 @@ function NavBar() {
                 Zanrovi
               </NavDropdown.Item>
               <NavDropdown.Divider />
+
+              <NavDropdown.Item 
+              onClick={()=>navigate(RoutesNames.SEZONE_PREGLED)}
+              >
+                Sezone
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+
+              <NavDropdown.Item 
+              onClick={()=>navigate(RoutesNames.EPIZODE_PREGLED)}
+              >
+                Epizode
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
               
               
             </NavDropdown>
