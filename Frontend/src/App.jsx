@@ -17,6 +17,10 @@ import Korisnici from "./pages/korisnici/Korisnici"
 import KorisniciDodaj from "./pages/korisnici/KorisniciDodaj"
 import KorisniciPromjeni from "./pages/korisnici/KorisniciPromjeni"
 
+import Zanrovi from "./pages/zanrovi/Zanrovi"
+import ZanroviDodaj from "./pages/zanrovi/ZanroviDodaj"
+import ZanroviPromjeni from "./pages/zanrovi/ZanroviPromjeni"
+
 
 function App() {
   return (
@@ -30,7 +34,9 @@ function App() {
           
 
 
-          
+          <Route path={RoutesNames.ZANROVI_PREGLED} element={<Zanrovi />} />
+          <Route path={RoutesNames.ZANROVI_NOVI} element={<ZanroviDodaj />} />
+          <Route path={RoutesNames.ZANROVI_PROMJENI} element={<ZanroviPromjeni />} />
 
           <Route path={RoutesNames.KORISNICI_PREGLED} element={<Korisnici />} />
           <Route path={RoutesNames.KORISNICI_NOVI} element={<KorisniciDodaj />} />

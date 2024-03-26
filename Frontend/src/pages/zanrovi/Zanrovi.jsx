@@ -14,7 +14,7 @@ export default function Zanrovi(){
     const navigate = useNavigate();
 
     async function dohvatiZanrove(){
-        await ZanrService.getZanrovi()
+        await ZanrService.get()
         .then((res)=>{
             setZanrovi(res.data);
         })
