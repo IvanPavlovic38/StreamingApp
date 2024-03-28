@@ -1,8 +1,8 @@
 import { App } from "../constants"
 import { httpService } from "./httpService";
 
-async function getSmjerovi(){
-    return await httpService.get('/Smjer')
+async function getSerije(){
+    return await httpService.get('/Serija')
     .then((res)=>{
         if(App.DEV) console.table(res.data);
 
@@ -12,8 +12,8 @@ async function getSmjerovi(){
     });
 }
 
-async function obrisiSmjer(sifra){
-    return await httpService.delete('/Smjer/' + sifra)
+async function obrisiSerije(sifra){
+    return await httpService.delete('/Serija/' + sifra)
     .then((res)=>{
         return {ok: true, poruka: res};
     }).catch((e)=>{
@@ -21,8 +21,8 @@ async function obrisiSmjer(sifra){
     });
 }
 
-async function dodajSmjer(smjer){
-    const odgovor = await httpService.post('/Smjer',smjer)
+async function dodajSeriju(serija){
+    const odgovor = await httpService.post('/Serija',serija)
     .then(()=>{
         return {ok: true, poruka: 'Uspješno dodano'}
     })
@@ -33,8 +33,8 @@ async function dodajSmjer(smjer){
     return odgovor;
 }
 
-async function promjeniSmjer(sifra,smjer){
-    const odgovor = await httpService.put('/Smjer/'+sifra,smjer)
+async function promjeniSeriju(sifra,serija){
+    const odgovor = await httpService.put('/Serija/'+sifra,serija)
     .then(()=>{
         return {ok: true, poruka: 'Uspješno promjnjeno'}
     })
@@ -46,7 +46,7 @@ async function promjeniSmjer(sifra,smjer){
 }
 
 async function getBySifra(sifra){
-    return await httpService.get('/Smjer/' + sifra)
+    return await httpService.get('/Serija/' + sifra)
     .then((res)=>{
         if(App.DEV) console.table(res.data);
 
@@ -60,9 +60,9 @@ async function getBySifra(sifra){
 
 
 export default{
-    getSmjerovi,
-    obrisiSmjer,
-    dodajSmjer,
-    promjeniSmjer,
+    getSerije,
+    obrisiSerije,
+    dodajSeriju,
+    promjeniSeriju,
     getBySifra
 };

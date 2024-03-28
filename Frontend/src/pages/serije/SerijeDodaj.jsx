@@ -1,16 +1,16 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { RoutesNames } from "../../constants";
-import SmjerService from "../../services/SerijeService";
+import SerijaService from "../../services/SerijeService";
 
-export default function SmjeroviDodaj(){
+export default function SerijeDodaj(){
     const navigate = useNavigate();
 
 
-    async function dodajSmjer(smjer){
-        const odgovor = await SmjerService.dodajSmjer(smjer);
+    async function dodajSeriju(serija){
+        const odgovor = await SmjerService.dodajSeriju(serija);
         if(odgovor.ok){
-          navigate(RoutesNames.SMJEROVI_PREGLED);
+          navigate(RoutesNames.SERIJE_PREGLED);
         }else{
           console.log(odgovor);
           alert(odgovor.poruka);
@@ -20,19 +20,14 @@ export default function SmjeroviDodaj(){
     function handleSubmit(e){
         e.preventDefault();
         const podaci = new FormData(e.target);
-        //console.log(podaci.get('naziv'));
 
-        const smjer = 
+        const serija = 
         {
             naziv: podaci.get('naziv'),
-            trajanje: parseInt(podaci.get('trajanje')),
-            cijena: parseFloat(podaci.get('cijena')),
-            upisnina: parseFloat(podaci.get('upisnina')),
-            verificiran: podaci.get('verificiran')=='on' ? true: false
+            trajanje: podaci.get('opis')
           };
 
-          //console.log(JSON.stringify(smjer));
-          dodajSmjer(smjer);
+          dodajSeriju(serija);
 
 
     }
@@ -51,34 +46,11 @@ export default function SmjeroviDodaj(){
                     />
                 </Form.Group>
 
-                <Form.Group controlId="trajanje">
-                    <Form.Label>Trajanje</Form.Label>
+                <Form.Group controlId="opis">
+                    <Form.Label>Opis</Form.Label>
                     <Form.Control 
                         type="text"
-                        name="trajanje"
-                    />
-                </Form.Group>
-
-                <Form.Group controlId="cijena">
-                    <Form.Label>Cijena</Form.Label>
-                    <Form.Control 
-                        type="text"
-                        name="cijena"
-                    />
-                </Form.Group>
-
-                <Form.Group controlId="upisnina">
-                    <Form.Label>Upisnina</Form.Label>
-                    <Form.Control 
-                        type="text"
-                        name="upisnina"
-                    />
-                </Form.Group>
-
-                <Form.Group controlId="verificiran">
-                    <Form.Check 
-                        label="Verificiran"
-                        name="verificiran"
+                        name="opis"
                     />
                 </Form.Group>
 
@@ -86,14 +58,14 @@ export default function SmjeroviDodaj(){
                     <Col>
                         <Link 
                         className="btn btn-danger"
-                        to={RoutesNames.SMJEROVI_PREGLED}>Odustani</Link>
+                        to={RoutesNames.SERIJE_PREGLED}>Odustani</Link>
                     </Col>
                     <Col>
                         <Button
                             variant="primary"
                             type="submit"
                         >
-                            Dodaj smjer
+                            Dodaj seriju
                         </Button>
                     </Col>
                 </Row>

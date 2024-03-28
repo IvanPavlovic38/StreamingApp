@@ -21,6 +21,10 @@ import Zanrovi from "./pages/zanrovi/Zanrovi"
 import ZanroviDodaj from "./pages/zanrovi/ZanroviDodaj"
 import ZanroviPromjeni from "./pages/zanrovi/ZanroviPromjeni"
 
+import Zanrovi from "./pages/zanrovi/Zanrovi"
+import ZanroviDodaj from "./pages/zanrovi/ZanroviDodaj"
+import ZanroviPromjeni from "./pages/zanrovi/ZanroviPromjeni"
+
 
 function App() {
   return (

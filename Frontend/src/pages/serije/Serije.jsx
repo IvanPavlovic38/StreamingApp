@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {  Button, Container, Table } from "react-bootstrap";
-import SmjerService from "../../services/SmjerService";
+import SerijeService from "../../services/SerijeService";
 import { NumericFormat } from "react-number-format";
 import { GrValidate } from "react-icons/gr";
 import { IoIosAdd } from "react-icons/io";
@@ -9,42 +9,29 @@ import { Link, useNavigate } from "react-router-dom";
 import { RoutesNames } from "../../constants";
 
 
-export default function Smjerovi(){
-    const [smjerovi,setSmjerovi] = useState();
+export default function Serije(){
+    const [serije,setSerije] = useState();
     const navigate = useNavigate();
 
     async function dohvatiSmjerove(){
         await SmjerService.getSmjerovi()
         .then((res)=>{
-            setSmjerovi(res.data);
+            setSerije(res.data);
         })
         .catch((e)=>{
             alert(e);
         });
     }
-     // Ovo se poziva dvaput u dev ali jednom u produkciji
-    // https://stackoverflow.com/questions/60618844/react-hooks-useeffect-is-called-twice-even-if-an-empty-array-is-used-as-an-ar
+    
     useEffect(()=>{
-        dohvatiSmjerove();
+        dohvatiSerije();
     },[]);
 
-    function verificiran(smjer){
-        if (smjer.verificiran==null) return 'gray';
-        if(smjer.verificiran) return 'green';
-        return 'red';
-    }
-
-    function verificiranTitle(smjer){
-        if (smjer.verificiran==null) return 'Nije definirano';
-        if(smjer.verificiran) return 'Verificiran';
-        return 'NIJE verificiran';
-    }
-
-    async function obrisiSmjer(sifra){
-        const odgovor = await SmjerService.obrisiSmjer(sifra);
+    async function obrisiSerija(sifra){
+        const odgovor = await SerijaService.obrisiSeriju(sifra);
         if (odgovor.ok){
             alert(odgovor.poruka.data.poruka);
-            dohvatiSmjerove();
+            dohvatiSerije();
         }
         
     }
@@ -54,7 +41,7 @@ export default function Smjerovi(){
     return (
 
         <Container>
-            <Link to={RoutesNames.SMJEROVI_NOVI} className="btn btn-success gumb">
+            <Link to={RoutesNames.SERIJE_NOVI} className="btn btn-success gumb">
                 <IoIosAdd
                 size={25}
                 /> Dodaj
@@ -63,15 +50,11 @@ export default function Smjerovi(){
                 <thead>
                     <tr>
                         <th>Naziv</th>
-                        <th>Trajanje</th>
-                        <th>Cijena</th>
-                        <th>Upisnina</th>
-                        <th>Verificiran</th>
-                        <th>Akcija</th>
+                        <th>Opis</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {smjerovi && smjerovi.map((smjer,index)=>(
+                    {serije && serije.map((smjer,index)=>(
                         <tr key={index}>
                             <td>{smjer.naziv}</td>
                             <td className="desno">{smjer.trajanje}</td>
@@ -115,7 +98,7 @@ export default function Smjerovi(){
                             <td className="sredina">
                                 <Button 
                                 variant="primary"
-                                onClick={()=>{navigate(`/smjerovi/${smjer.sifra}`)}}>
+                                onClick={()=>{navigate(`/serije/${serija.sifra}`)}}>
                                     <FaEdit 
                                     size={25}
                                     />
@@ -124,7 +107,7 @@ export default function Smjerovi(){
                                     &nbsp;&nbsp;&nbsp;
                                 <Button
                                     variant="danger"
-                                    onClick={()=>obrisiSmjer(smjer.sifra)}
+                                    onClick={()=>obrisiSerije(serija.sifra)}
                                 >
                                     <FaTrash  
                                     size={25}

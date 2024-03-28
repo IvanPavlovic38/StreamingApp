@@ -54,6 +54,13 @@ function NavBar() {
                 Epizode
               </NavDropdown.Item>
               <NavDropdown.Divider />
+
+              <NavDropdown.Item 
+              onClick={()=>navigate(RoutesNames.SERIJE_PREGLED)}
+              >
+                Serije
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
               
               
             </NavDropdown>

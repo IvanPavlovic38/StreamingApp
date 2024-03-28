@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import SmjerService from "../../services/SerijeService";
+import SerijaService from "../../services/SerijeService";
 import { RoutesNames } from "../../constants";
 
-export default function SmjeroviPromjeni(){
+export default function SerijePromjeni(){
 
     const navigate = useNavigate();
     const routeParams = useParams();
-    const [smjer,setSmjer] = useState({});
+    const [serija,setSerija] = useState({});
 
-    async function dohvatiSmjer(){
-        await SmjerService.getBySifra(routeParams.sifra)
+    async function dohvatiSeriju(){
+        await SerijaService.getBySifra(routeParams.sifra)
         .then((res)=>{
-            setSmjer(res.data)
+            setSerija(res.data)
         })
         .catch((e)=>{
             alert(e.poruka);
@@ -21,14 +21,13 @@ export default function SmjeroviPromjeni(){
     }
 
     useEffect(()=>{
-        //console.log("useEffect")
-        dohvatiSmjer();
+        dohvatiSeriju();
     },[]);
 
-    async function promjeniSmjer(smjer){
-        const odgovor = await SmjerService.promjeniSmjer(routeParams.sifra,smjer);
+    async function promjeniSeriju(serija){
+        const odgovor = await SerijaService.promjeniSeriju(routeParams.sifra,serija);
         if(odgovor.ok){
-          navigate(RoutesNames.SMJEROVI_PREGLED);
+          navigate(RoutesNames.SERIJE_PREGLED);
         }else{
           console.log(odgovor);
           alert(odgovor.poruka);
@@ -42,14 +41,10 @@ export default function SmjeroviPromjeni(){
         const smjer = 
         {
             naziv: podaci.get('naziv'),
-            trajanje: parseInt(podaci.get('trajanje')),
-            cijena: parseFloat(podaci.get('cijena')),
-            upisnina: parseFloat(podaci.get('upisnina')),
-            verificiran: podaci.get('verificiran')=='on' ? true: false
+            trajanje: podaci.get('opis')
           };
 
-          //console.log(JSON.stringify(smjer));
-          promjeniSmjer(smjer);
+          promjeniSeriju(serija);
     }
 
 
@@ -63,43 +58,17 @@ export default function SmjeroviPromjeni(){
                     <Form.Label>Naziv</Form.Label>
                     <Form.Control 
                         type="text"
-                        defaultValue={smjer.naziv}
+                        defaultValue={serija.naziv}
                         name="naziv"
                     />
                 </Form.Group>
 
-                <Form.Group controlId="trajanje">
-                    <Form.Label>Trajanje</Form.Label>
+                <Form.Group controlId="opis">
+                    <Form.Label>Opis</Form.Label>
                     <Form.Control 
                         type="text"
-                        defaultValue={smjer.trajanje}
-                        name="trajanje"
-                    />
-                </Form.Group>
-
-                <Form.Group controlId="cijena">
-                    <Form.Label>Cijena</Form.Label>
-                    <Form.Control 
-                        type="text"
-                        defaultValue={smjer.cijena}
-                        name="cijena"
-                    />
-                </Form.Group>
-
-                <Form.Group controlId="upisnina">
-                    <Form.Label>Upisnina</Form.Label>
-                    <Form.Control 
-                        type="text"
-                        defaultValue={smjer.upisnina}
-                        name="upisnina"
-                    />
-                </Form.Group>
-
-                <Form.Group controlId="verificiran">
-                    <Form.Check 
-                        label="Verificiran"
-                        defaultChecked={smjer.verificiran}
-                        name="verificiran"
+                        defaultValue={serija.opis}
+                        name="opis"
                     />
                 </Form.Group>
 
@@ -107,14 +76,14 @@ export default function SmjeroviPromjeni(){
                     <Col>
                         <Link 
                         className="btn btn-danger"
-                        to={RoutesNames.SMJEROVI_PREGLED}>Odustani</Link>
+                        to={RoutesNames.SERIJE_PREGLED}>Odustani</Link>
                     </Col>
                     <Col>
                         <Button
                             variant="primary"
                             type="submit"
                         >
-                            Promjeni smjer
+                            Promjeni seriju
                         </Button>
                     </Col>
                 </Row>
